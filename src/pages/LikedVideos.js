@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { StyledTrending } from "./Trending";
 import TrendingCard from "../components/TrendingCard";
 import { getLikedVideos, getVideo } from "../actions";
-import Skeleton from "../skeletons/TrendingSkeleton";
 
 const LikedVideos = ({ isFetching, videos, getLikedVideos }) => {
 

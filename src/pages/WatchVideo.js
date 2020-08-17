@@ -3,13 +3,9 @@ import { get, isEmpty } from 'lodash';
 import styled, { css } from "styled-components";
 import { connect } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import Comments from "../components/Comments";
 import VideoCard from "../components/VideoCard";
-import Button from "../styles/Button";
 import Player from "../components/Player";
 import NoResults from "../components/NoResults";
-import Skeleton from "../skeletons/WatchVideoSkeleton";
-// import { LikeIcon, DislikeIcon } from "../components/Icons";
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import {
@@ -24,8 +20,7 @@ import {
   cancelDislike,
   clearNotFound,
 } from "../actions";
-import { SUBSCRIBE_FROM_VIDEO, UNSUBSCRIBE_FROM_VIDEO } from "../actions/types";
-import { timeSince, getNumberWithCommas } from "../utils";
+import { getNumberWithCommas } from "../utils";
 
 const Wrapper = styled.div`
   display: grid;

@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
-import { get, isEmpty } from 'lodash';
+import React, { useEffect, useState } from "react";
+import { get } from 'lodash';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import styled from "styled-components";
@@ -9,7 +9,6 @@ import VideoCard from "../components/VideoCard";
 import VideoGrid from "../styles/VideoGrid";
 import { getRecommendations, getVideo } from "../actions";
 import Skeleton from "../skeletons/HomeSkeleton";
-import { GET_VIDEO } from '../actions/types';
 
 export const StyledHome = styled.div`
   padding: 1.3rem;
