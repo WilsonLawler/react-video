@@ -27,7 +27,7 @@ import YourVideos from "./pages/YourVideos";
 import LikedVideos from "./pages/LikedVideos";
 
 const AppRouter = () => (
-  <Router>
+  <Router basename="/react-video">
     {/* <Navbar /> */}
     <Sidebar />
     <BottomBar />
