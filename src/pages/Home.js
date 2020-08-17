@@ -52,26 +52,24 @@ const Home = ({ isFetching, videos, getRecommendations, getVideo, match, nextPag
   const [active, setActive] = useState(1);
   const [alreadyRender, setAlreadyRender] = useState(false);
   const page = get(match, 'params.page', '1');
-  // useEffect(() => {
-  //   if (!isEmpty(page) && !isEmpty(nextPageToken) && !alreadyRender) {
-  //     setActive(Number(page));
-  //     getRecommendations(nextPageToken);
-  //     setAlreadyRender(true);
-  //   }
-  // }, [nextPageToken])
+
   let items = [];
   for (let number = 1; number < Math.ceil(50 / 12); number++) {
     items.push(
-      <Pagination.Item key={number} active={number === active} href={`/react-video/${number}`}>
-        {number}
-      </Pagination.Item>,
+
+      <Pagination.Item key={number} active={number === active}>
+        <Link to={`/${number}`}>
+          {number}
+        </Link>
+      </Pagination.Item >
+
     );
   }
 
   useEffect(() => {
     setActive(Number(page));
     getRecommendations();
-  }, []);
+  }, [page]);
 
   if (isFetching) {
     return <Skeleton title={true} />;
