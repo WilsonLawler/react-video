@@ -50,13 +50,14 @@ const VideoCard = ({ video }) => {
   const contentDetails = get(video, 'contentDetails', {});
   // 
   const thumbnail = get(snippet, 'thumbnails.maxres.url', '');
+  const thumbnailAlt = get(snippet, 'thumbnails.high.url', '');
   const channelTitle = get(snippet, 'channelTitle', '');
   const title = get(snippet, 'title', '');
   const viewCount = get(statistics, 'viewCount', '');
   const duration = get(contentDetails, 'duration', '');
   return (
     <Wrapper>
-      <img className="thumb" src={thumbnail} alt="thumbnail" />
+      <img className="thumb" src={thumbnail ? thumbnail : thumbnailAlt} alt="thumbnail" />
       <div className="video-info-container">
         <div className="video-info">
           <h4>
