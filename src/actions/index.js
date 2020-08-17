@@ -40,35 +40,6 @@ import {
   authenticate,
 } from "../utils";
 
-export const signupUser = (payload, clearForm) => async (dispatch) => {
-  const user = await authenticate("signup", payload);
-
-  if (user) {
-    clearForm();
-    dispatch({ type: SIGNUP, payload: user });
-    window.location = "/";
-  }
-};
-
-export const loginUser = (payload, clearForm) => async (dispatch) => {
-  const user = await authenticate("login", payload);
-
-  if (user) {
-    clearForm();
-    dispatch({ type: LOGIN, payload: user });
-    window.location = "/";
-  }
-};
-
-export const logoutUser = () => (dispatch) => {
-  localStorage.removeItem("user");
-
-  dispatch({
-    type: LOGOUT,
-  });
-
-  window.location = "/";
-};
 
 export const getRecommendations = (pageToken = null) => async (dispatch) => {
   const res = await api.get("/videos", {
@@ -83,8 +54,6 @@ export const getRecommendations = (pageToken = null) => async (dispatch) => {
       // https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&chart=mostPopular&maxResults=3&key=
     }
   });
-  console.log('res', pageToken);
-  console.log('res_after', res.data);
 
   dispatch({
     type: GET_RECOMMENDATIONS,
@@ -111,43 +80,9 @@ export const getTrending = () => async (dispatch) => {
   });
 };
 
-export const getChannelRecommendations = (data) => async (dispatch) => {
-  const res = await api.get("users", data);
-
-  dispatch({
-    type: GET_CHANNEL_RECOMMENDATIONS,
-    payload: {
-      isFetching: false,
-      channels: res.data.data,
-    },
-  });
-};
-
-export const getFeed = () => async (dispatch) => {
-  const res = await api.get("users/feed");
-
-  dispatch({
-    type: GET_FEED,
-    payload: {
-      isFetching: false,
-      videos: res.data.data,
-    },
-  });
-};
 
 export const getVideo = (video) => async (dispatch) => {
   try {
-    console.log('video', video);
-    // const res = await api.get("/videos", {
-    //   params: {
-    //     id: videoId,
-    //     type: 'video',
-    //     part: 'snippet,contentDetails,statistics',
-    //     chart: 'mostPopular',
-    //     key: 'AIzaSyDcK11Qfn3aYLfvPiBPHXWFOWxEZOvV-5Q'
-    //     // https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&chart=mostPopular&maxResults=3&key=
-    //   }
-    // });
     dispatch({
       type: GET_VIDEO,
       payload: {
@@ -162,98 +97,6 @@ export const getVideo = (video) => async (dispatch) => {
   }
 };
 
-export const clearVideo = () => ({ type: CLEAR_VIDEO });
-
-export const addComment = ({ videoId, text }) => async (dispatch) => {
-  const res = await api.post(`videos/${videoId}/comment`, { text });
-
-  dispatch({
-    type: ADD_COMMENT,
-    payload: res.data.data,
-  });
-};
-
-export const getProfile = (userId) => async (dispatch) => {
-  try {
-    const res = await api.get(`users/${userId}`);
-
-    dispatch({
-      type: GET_PROFILE,
-      payload: {
-        isFetching: false,
-        ...res.data.data,
-      },
-    });
-  } catch (err) {
-    if (err.response.status === 404) {
-      dispatch({
-        type: LOGOUT,
-      });
-    } else {
-      dispatch({
-        type: SHOW_NOT_FOUND,
-      });
-    }
-  }
-};
-
-export const clearProfile = () => ({ type: CLEAR_PROFILE });
-
-export const updateProfile = (data) => async (dispatch) => {
-  dispatch({
-    type: UPDATE_PROFILE,
-    payload: data,
-  });
-
-  await api.put("users", data);
-};
-
-export const getSearchResults = (searchterm) => async (dispatch) => {
-  const userRes = await api.get(`users/search?searchterm=${searchterm}`);
-  const videoRes = await api.get(`videos/search?searchterm=${searchterm}`);
-
-  dispatch({
-    type: GET_SEARCH_RESULTS,
-    payload: {
-      isFetching: false,
-      users: userRes.data.data,
-      videos: videoRes.data.data,
-    },
-  });
-};
-
-export const clearSearchResults = () => ({ type: CLEAR_SEARCH_RESULTS });
-export const subscribeChannel = ({ channel, type }) => async (dispatch) => {
-  dispatch({
-    type,
-    payload: channel,
-  });
-
-  addChannelLocalSt(channel);
-
-  dispatch({
-    type: ADD_CHANNEL,
-    payload: channel,
-  });
-
-  await api.get(`users/${channel.id}/togglesubscribe`);
-};
-
-export const unsubscribeChannel = ({ channelId, type }) => async (dispatch) => {
-  dispatch({
-    type,
-    payload: channelId,
-  });
-
-  removeChannelLocalSt(channelId);
-
-  dispatch({
-    type: REMOVE_CHANNEL,
-    payload: channelId,
-  });
-
-  await api.get(`users/${channelId}/togglesubscribe`);
-};
 
 export const likeVideo = (video) => async (dispatch) => {
   dispatch({
@@ -264,8 +107,6 @@ export const likeVideo = (video) => async (dispatch) => {
     type: ADD_TO_LIKED_VIDEOS,
     payload: video,
   });
-
-  // await api.get(`videos/${video.id}/like`);
 };
 
 export const cancelLike = (videoId) => async (dispatch) => {
@@ -277,17 +118,8 @@ export const cancelLike = (videoId) => async (dispatch) => {
     type: REMOVE_FROM_LIKED_VIDEOS,
     payload: videoId,
   });
-
-  // await api.get(`videos/${videoId}/like`);
 };
 
-export const dislikeVideo = (videoId) => async (dispatch) => {
-  dispatch({
-    type: DISLIKE,
-  });
-
-  await api.get(`videos/${videoId}/dislike`);
-};
 
 export const cancelDislike = (videoId) => async (dispatch) => {
   dispatch({
@@ -309,52 +141,4 @@ export const getLikedVideos = () => async (dispatch) => {
   });
 };
 
-export const updateUser = (data) => async (dispatch) => {
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  const updatedUser = { ...user, ...data };
-
-  localStorage.setItem("user", JSON.stringify(updatedUser));
-
-  dispatch({
-    type: UPDATE_USER,
-    payload: data,
-  });
-};
-
-export const uploadVideo = (video) => async (dispatch) => {
-  const res = await api.post("videos", video);
-
-  const { id, avatar, username } = JSON.parse(localStorage.getItem("user"));
-
-  const newVideo = res.data.data;
-  newVideo.views = 0;
-  newVideo.User = { id, avatar, username };
-
-  dispatch({ type: ADD_TO_RECOMMENDATIONS, payload: newVideo });
-};
-
-export const getHistory = () => async (dispatch) => {
-  const res = await api.get("users/history");
-
-  dispatch({
-    type: GET_HISTORY,
-    payload: {
-      isFetching: false,
-      videos: res.data.data,
-    },
-  });
-};
-
-export const addToHistory = (video) => async (dispatch) => {
-  dispatch({
-    type: ADD_TO_HISTORY,
-    payload: video,
-  });
-
-  await api.get(`videos/${video.id}/view`);
-};
-
-export const clearNotFound = () => ({ type: CLEAR_NOT_FOUND });
-export const openSidebar = () => ({ type: OPEN_SIDEBAR });
 export const closeSidebar = () => ({ type: CLOSE_SIDEBAR });

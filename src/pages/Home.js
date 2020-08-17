@@ -50,7 +50,6 @@ export const StyledHome = styled.div`
 const Home = ({ isFetching, videos, getRecommendations, getVideo, match, nextPageToken }) => {
 
   const [active, setActive] = useState(1);
-  const [alreadyRender, setAlreadyRender] = useState(false);
   const page = get(match, 'params.page', '1');
 
   let items = [];
@@ -78,7 +77,7 @@ const Home = ({ isFetching, videos, getRecommendations, getVideo, match, nextPag
 
   return (
     <StyledHome>
-      <h2>Recommended</h2>
+      <h2>首頁</h2>
       <VideoGrid>
         {!isFetching &&
           videos.map((video) => (
@@ -99,19 +98,5 @@ const mapStateToProps = ({ recommendation }) => ({
   videos: recommendation.videos,
   nextPageToken: recommendation.nextPageToken
 });
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     onLinkClick: (video) => {
-//       dispatch({
-//         type: GET_VIDEO,
-//         payload: {
-//           isFetching: false,
-//           video
-//         },
-//       });
-//     },
-//     getRecommendations
-//   }
-// }
 
 export default connect(mapStateToProps, { getRecommendations, getVideo })(Home);

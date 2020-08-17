@@ -10,15 +10,10 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import {
   getRecommendations,
-  clearVideo,
   getVideo,
-  unsubscribeChannel,
-  subscribeChannel,
   likeVideo,
-  dislikeVideo,
   cancelLike,
   cancelDislike,
-  clearNotFound,
 } from "../actions";
 import { getNumberWithCommas } from "../utils";
 
@@ -100,17 +95,12 @@ const WatchVideo = ({
   isFetching,
   next,
   video,
-  clearVideo,
   getVideo,
   getRecommendations,
-  subscribeChannel,
-  unsubscribeChannel,
   likeVideo,
   cancelLike,
-  dislikeVideo,
   cancelDislike,
   notfound,
-  clearNotFound,
 }) => {
   const { videoId } = useParams();
   const [saveArray, setSaveArray] = useState([]);
@@ -127,7 +117,6 @@ const WatchVideo = ({
     if (!isEmpty(savedVideos)) {
       setSaveArray(savedVideos);
       const item = savedVideos.filter(item => item.id === videoId);
-      console.log('item', item);
       if (!isEmpty(item)) {
         setInsaved(true);
         if (inCanceled) {
@@ -136,7 +125,6 @@ const WatchVideo = ({
       } else if (isEmpty(item)) {
         setInsaved(false);
         setInCanceled(false);
-        console.log('hello');
       }
     } else if (isEmpty(savedVideos)) {
       setInsaved(false);
@@ -167,14 +155,6 @@ const WatchVideo = ({
     }
   }
 
-  // useEffect(() => {
-  //   // getRecommendations();
-
-  //   return () => {
-  //     clearNotFound();
-  //     clearVideo();
-  //   };
-  // }, [videoId, clearVideo, getRecommendations, getVideo, clearNotFound]);
 
   if (notfound) {
     return (
@@ -185,9 +165,6 @@ const WatchVideo = ({
     );
   }
 
-  // if (isFetching) {
-  //   return <Skeleton />;
-  // }
 
   return (
     <Wrapper
@@ -246,14 +223,9 @@ const mapStateToProps = ({ notfound, video, recommendation }) => ({
 });
 
 export default connect(mapStateToProps, {
-  clearVideo,
   getVideo,
   cancelLike,
   getRecommendations,
-  subscribeChannel,
-  unsubscribeChannel,
   likeVideo,
-  dislikeVideo,
   cancelDislike,
-  clearNotFound,
 })(WatchVideo);

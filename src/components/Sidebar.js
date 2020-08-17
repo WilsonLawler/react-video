@@ -75,67 +75,10 @@ const Sidebar = ({ open, closeSidebar }) => {
       >
         <div className="icon">
           <HomeIcon />
-          <span>Home</span>
+          <span>首頁</span>
         </div>
       </NavLink>
-
-      {/* <NavLink
-        onClick={() => closeSidebar()}
-        to="/feed/trending"
-        activeClassName="active"
-      >
-        <div className="icon">
-          <TrendingIcon />
-          <span>Trending</span>
-        </div>
-      </NavLink> */}
-
-      {/* <NavLink
-        onClick={() => closeSidebar()}
-        to="/feed/subscriptions"
-        activeClassName="active"
-      >
-        <div className="icon">
-          <SubIcon />
-          <span>Subscriptions</span>
-        </div>
-      </NavLink> */}
-
       <div className="ruler"></div>
-
-      {/* <NavLink
-        onClick={() => closeSidebar()}
-        to="/feed/library"
-        activeClassName="active"
-      >
-        <div className="icon">
-          <LibIcon />
-          <span>Library</span>
-        </div>
-      </NavLink> */}
-
-      {/* <NavLink
-        onClick={() => closeSidebar()}
-        to="/feed/history"
-        activeClassName="active"
-      >
-        <div className="icon">
-          <HistoryIcon />
-          <span>History</span>
-        </div>
-      </NavLink> */}
-
-      {/* <NavLink
-        onClick={() => closeSidebar()}
-        to="/feed/my_videos"
-        activeClassName="active"
-      >
-        <div className="icon">
-          <VidIcon />
-          <span>Your videos</span>
-        </div>
-      </NavLink> */}
-
       <NavLink
         onClick={() => closeSidebar()}
         to="/feed/liked_videos"
@@ -143,13 +86,10 @@ const Sidebar = ({ open, closeSidebar }) => {
       >
         <div className="icon">
           <LikeIcon />
-          <span>Liked videos</span>
+          <span>我的收藏</span>
         </div>
       </NavLink>
-
       <div className="ruler"></div>
-
-      {/* <Subscriptions /> */}
     </SidebarWrapper>
   );
 };

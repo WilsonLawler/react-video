@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
-import { addToHistory } from "../actions";
 import myVideo from '../assets/videoShort.mp4';
 
-const Player = ({ isViewed, previewUrl, src, poster, video, addToHistory }) => {
+const Player = ({ isViewed, previewUrl, src, poster, video }) => {
   let videoRef;
 
   useEffect(() => {
@@ -17,16 +16,10 @@ const Player = ({ isViewed, previewUrl, src, poster, video, addToHistory }) => {
       player.src({ type: "video/mp4", src: myVideo });
     }
 
-    player.on("ended", function () {
-      if (!isViewed && !previewUrl) {
-        addToHistory(video);
-      }
-    });
-
     return () => {
       player.dispose();
     };
-  }, [src, poster, previewUrl, videoRef, isViewed, addToHistory]);
+  }, [src, poster, previewUrl, videoRef, isViewed]);
 
   return (
     <div>
@@ -59,4 +52,4 @@ const mapStateToProps = ({ video }) => ({
   },
 });
 
-export default connect(mapStateToProps, { addToHistory })(Player);
+export default connect(mapStateToProps)(Player);

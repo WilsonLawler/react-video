@@ -10,11 +10,11 @@ const LikedVideos = ({ isFetching, videos, getLikedVideos }) => {
 
   return (
     <StyledTrending>
-      <h2>Liked Videos</h2>
+      <h2>我的收藏</h2>
 
       {videos?.length === 0 && (
         <p className="secondary">
-          Videos that you have liked will show up here
+          您收藏的影片將會顯示於此
         </p>
       )}
 
