@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { get } from 'lodash';
-import { timeSince, getNumberWithCommas } from "../utils";
+import { Link } from "react-router-dom";
+import Button from '../styles/Button';
+import { getNumberWithCommas } from "../utils";
 
 const Wrapper = styled.div`
   margin: 1.4rem 0;
@@ -29,6 +31,17 @@ const Wrapper = styled.div`
 
   p span {
     padding-right: 0.3rem;
+  }
+
+  @media screen and (max-width: 1740px) {
+    button {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 1093px) {
+    button {
+      display: inline;
+    }
   }
 
   @media screen and (max-width: 750px) {
@@ -92,6 +105,9 @@ const TrendingCard = ({ video }) => {
           <span>{getNumberWithCommas(viewCount) || 0} views</span>
         </p>
         <p className="secondary">{description.substr(0, 130)}</p>
+        <Link to='/1'>
+          <Button>回首頁</Button>
+        </Link>
       </div>
     </Wrapper>
   );

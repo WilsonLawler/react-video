@@ -8,6 +8,7 @@ import Player from "../components/Player";
 import NoResults from "../components/NoResults";
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import Button from '../styles/Button';
 import {
   getRecommendations,
   getVideo,
@@ -73,11 +74,24 @@ const Wrapper = styled.div`
     margin-bottom: 1rem;
   }
 
+  @media screen and (max-width: 1740px) {
+    button {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 1093px) {
+    button {
+      display: inline;
+    }
+  }
+
 	@media screen and (max-width: 930px) {
     grid-template-columns: 90%;
     .related-videos {
       display: none;
     }
+    
   }
 
   @media screen and (max-width: 930px) {
@@ -194,11 +208,15 @@ const WatchVideo = ({
               </p>
             </div>
           </div>
+          <Link to="/feed/liked_videos">
+            <Button>我的收藏</Button>
+          </Link>
+
         </div>
       </div>
 
       <div className="related-videos">
-        <h3 style={{ marginBottom: "1rem" }}>Up Next</h3>
+        <h3 style={{ marginBottom: "1rem" }}>推薦影片</h3>
         {!isFetching &&
           next
             .filter((vid) => vid.id !== video.id)
