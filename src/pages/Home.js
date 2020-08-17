@@ -62,7 +62,7 @@ const Home = ({ isFetching, videos, getRecommendations, getVideo, match, nextPag
   let items = [];
   for (let number = 1; number < Math.ceil(50 / 12); number++) {
     items.push(
-      <Pagination.Item key={number} active={number === active} href={`/${number}`}>
+      <Pagination.Item key={number} active={number === active} href={`/react-video/${number}`}>
         {number}
       </Pagination.Item>,
     );
