@@ -90,17 +90,17 @@ const TrendingCard = ({ video }) => {
   const statistics = get(video, 'statistics', {});
   // 
   const thumbnail = get(snippet, 'thumbnails.maxres.url', '');
+  const thumbnailAlt = get(snippet, 'thumbnails.high.url', '');
   const title = get(snippet, 'title', '');
   const viewCount = get(statistics, 'viewCount', '');
   const description = get(snippet, 'description', '');
 
   return (
     <Wrapper>
-      <img className="thumb" src={thumbnail} alt="thumbnail" />
+      <img className="thumb" src={thumbnail ? thumbnail : thumbnailAlt} alt="thumbnail" />
       <div className="video-info-container">
         <h3>{title}</h3>
         <p className="secondary">
-          {/* <span>{video.User.username}</span> */}
           <span>•</span>
           <span>{getNumberWithCommas(viewCount) || 0} views</span>
         </p>

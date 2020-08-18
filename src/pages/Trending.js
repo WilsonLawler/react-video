@@ -14,6 +14,10 @@ export const StyledTrending = styled.div`
   padding-bottom: 7rem;
   padding-bottom: ${(props) => (props.nopad ? "0.5rem" : "7rem")};
 
+  a {
+    text-decoration: none;
+  }
+
   @media screen and (max-width: 930px) {
     width: 95%;
   }

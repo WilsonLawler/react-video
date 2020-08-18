@@ -25,6 +25,10 @@ const Wrapper = styled.div`
   padding: 1.3rem;
   padding-bottom: 7rem;
 
+  a {
+    text-decoration: none;
+  }
+
   .video-container .video-info {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -182,8 +186,6 @@ const WatchVideo = ({
 
   return (
     <Wrapper
-      filledLike={video && video.isLiked}
-      filledDislike={video && video.isDisliked}
     >
       <div className="video-container">
         <div className="video"><Player /></div>

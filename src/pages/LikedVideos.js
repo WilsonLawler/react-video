@@ -6,7 +6,7 @@ import { StyledTrending } from "./Trending";
 import TrendingCard from "../components/TrendingCard";
 import { getLikedVideos, getVideo } from "../actions";
 
-const LikedVideos = ({ isFetching, videos, getLikedVideos }) => {
+const LikedVideos = ({ isFetching, videos, getLikedVideos, getVideo }) => {
 
 
   return (

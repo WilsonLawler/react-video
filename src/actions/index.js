@@ -1,44 +1,18 @@
 import {
-  SIGNUP,
-  LOGIN,
-  LOGOUT,
-  GET_FEED,
   GET_VIDEO,
-  CLEAR_VIDEO,
-  ADD_COMMENT,
-  GET_PROFILE,
-  CLEAR_PROFILE,
-  UPDATE_PROFILE,
-  OPEN_SIDEBAR,
   CLOSE_SIDEBAR,
   GET_RECOMMENDATIONS,
-  GET_CHANNEL_RECOMMENDATIONS,
   LIKE,
-  DISLIKE,
   CANCEL_LIKE,
   CANCEL_DISLIKE,
-  GET_SEARCH_RESULTS,
-  CLEAR_SEARCH_RESULTS,
   GET_TRENDING,
-  ADD_CHANNEL,
-  REMOVE_CHANNEL,
   GET_LIKED_VIDEOS,
-  UPDATE_USER,
   ADD_TO_LIKED_VIDEOS,
   REMOVE_FROM_LIKED_VIDEOS,
-  ADD_TO_RECOMMENDATIONS,
-  GET_HISTORY,
   SHOW_NOT_FOUND,
-  CLEAR_NOT_FOUND,
-  ADD_TO_HISTORY,
 } from "./types";
 
 import api from "../services/api";
-import {
-  addChannelLocalSt,
-  removeChannelLocalSt,
-  authenticate,
-} from "../utils";
 
 
 export const getRecommendations = (pageToken = null) => async (dispatch) => {
