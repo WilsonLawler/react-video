@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
   Redirect,
   Switch,
@@ -19,7 +19,7 @@ import WatchVideo from "./pages/WatchVideo";
 import LikedVideos from "./pages/LikedVideos";
 
 const AppRouter = () => (
-  <Router basename="/react-video">
+  <Router>
     <Sidebar />
     <BottomBar />
     <Container>
